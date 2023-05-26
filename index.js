@@ -1,12 +1,18 @@
 const express = require("express");
-const colors = requie("./colors.json");
-
+const colors = require("./colors.json");
 const app = express();
 app.use(express.json());
 
 app.get("/send-a-color", (req, res) => {
   console.log(req.query.color);
-  res.send("Color recived");
+  // console.log(req.query);
+  // console.log(colors);
+
+  res.json({ color: req.query.color, hexa: colors[req.query.color] });
+
+  if (colors[req.query.color] === undefined) {
+    console.log("color not found");
+  }
 });
 
 app.listen(3000, () => {
