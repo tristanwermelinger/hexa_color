@@ -7,12 +7,10 @@ app.get("/send-a-color", (req, res) => {
   console.log(req.query.color);
   // console.log(req.query);
   // console.log(colors);
-
-  res.json({ color: req.query.color, hexa: colors[req.query.color] });
-
   if (colors[req.query.color] === undefined) {
-    console.log("color not found");
+    res.json({ message: "color not found" });
   }
+  res.json({ color: req.query.color, hexa: colors[req.query.color] });
 });
 
 app.listen(3000, () => {
